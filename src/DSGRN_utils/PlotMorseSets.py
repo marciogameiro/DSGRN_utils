@@ -202,7 +202,7 @@ def PlotMorseSets(morse_graph, stg, graded_complex, morse_nodes=None, cmap=None,
     # Loop through the top cells
     for cell1 in allowed_top_cells:
         # Get list of adjacencies of cell1 in the STG
-        adjacencies = [c for c in stg.digraph.adjacencies(cell1) if c in allowed_top_cells]
+        adjacencies = set([c for c in stg.digraph.adjacencies(cell1) if c in allowed_top_cells])
         # Get cell1 centroid
         cell1_center = cell_centroid(cell1)
         # Plot centroid as a filled circle if self edge
@@ -277,7 +277,7 @@ def PlotMorseSets(morse_graph, stg, graded_complex, morse_nodes=None, cmap=None,
     # ax.set_aspect('auto')
     # Auto scale axis
     ax.autoscale_view()
-    # Axis in on by default
+    # Axis is on by default
     if not plot_axis:
         ax.axis('off')
     if save_fig:
