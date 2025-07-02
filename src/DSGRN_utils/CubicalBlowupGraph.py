@@ -9,7 +9,7 @@ import DSGRN
 import pychomp
 
 class CubicalBlowupGraph:
-    def __init__(self, parameter=None, labelling=None, num_thresholds=None, self_edges=True, level=3):
+    def __init__(self, parameter=None, labelling=None, num_thresholds=None, self_edges=True, level=4):
         # Check if input arguments are valid
         if parameter is None and (labelling is None or num_thresholds is None):
             raise ValueError('Either parameter or labelling and num_thresholds must be provided.')
@@ -454,6 +454,9 @@ class CubicalBlowupGraph:
             return 0
         # Get decision wall components and check wall label direction
         cc_dec_wall_top_cell, n_opaque, side = dec_wall
+        # If level < 4 check if n_opaque is actively regulate by cc_face
+        if self.level < 4 and n_opaque in self.active_regulation_map(cc_face):
+            return 0
         if self.wall_label(cc_dec_wall_top_cell, n_opaque, side) == side:
             # cc_face is an exit face of cc_coface
             return -face_sign
@@ -645,7 +648,7 @@ class CubicalBlowupGraph:
                 if flow_dir == 1:
                     self.digraph.add_edge(cell1, cell2)
                     continue
-                # Add edge corresponding to F_2 if level >= 2
+                # Add edge corresponding to F_2 or F_4 if level >= 2 or level == 4
                 if self.level > 1:
                     # Get decision wall flow direction and add edge
                     flow_dir = self.decision_wall_direction(cc_cell1, cc_cell2)
@@ -655,7 +658,7 @@ class CubicalBlowupGraph:
                     if flow_dir == 1:
                         self.digraph.add_edge(cell1, cell2)
                         continue
-                # Add edges corresponding to F_3 if level == 3
+                # Add edges corresponding to F_3 if level >= 3
                 if self.level == 3:
                     # Get cyclic extension flow direction and unstable cells and add edges
                     flow_dir, unst_cells = self.cyclic_extension_direction(cc_cell1, cc_cell2)
