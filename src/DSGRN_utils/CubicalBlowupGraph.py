@@ -454,15 +454,14 @@ class CubicalBlowupGraph:
             return 0
         # Get decision wall components and check wall label direction
         cc_dec_wall_top_cell, n_opaque, side = dec_wall
-        # If level < 4 check if n_opaque is actively regulate by cc_face
-        if self.level < 4 and n_opaque in self.active_regulation_map(cc_face):
-            return 0
         if self.wall_label(cc_dec_wall_top_cell, n_opaque, side) == side:
             # cc_face is an exit face of cc_coface
             return -face_sign
-        else:
-            # cc_face is an entrance face of cc_coface
-            return face_sign
+        # If level < 4 check if n_opaque is actively regulate by cc_face
+        if self.level < 4 and n_opaque in self.active_regulation_map(cc_face):
+            return 0
+        # cc_face is an entrance face of cc_coface
+        return face_sign
 
     def semi_opaque_cell(self, cc_cell):
         """Return True if cc_cell is semi-opaque"""
