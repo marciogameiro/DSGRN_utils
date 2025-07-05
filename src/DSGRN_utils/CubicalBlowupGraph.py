@@ -2,8 +2,9 @@
 ### MIT LICENSE 2024 Marcio Gameiro
 
 # TODO: 1) Maybe cache regulation map and cycle decomposition to increase performance
-#       2) Level 3 is allowed in higher dimensions (add restrictions to that)
-#       3) The default value of self_edges is True (change it to False)
+#       2) Level 3 and 4 are allowed in higher dimensions (add restrictions to that?)
+#       3) The default value of self_edges is True (change it to False?)
+#       4) Add 3D Morse sets plotting cpabilities
 
 import DSGRN
 import pychomp
