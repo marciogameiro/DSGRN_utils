@@ -658,7 +658,7 @@ class CubicalBlowupGraph:
                         self.digraph.add_edge(cell1, cell2)
                         continue
                 # Add edges corresponding to F_3 if level >= 3
-                if self.level == 3:
+                if self.level >= 3:
                     # Get cyclic extension flow direction and unstable cells and add edges
                     flow_dir, unst_cells = self.cyclic_extension_direction(cc_cell1, cc_cell2)
                     if flow_dir == -1:
