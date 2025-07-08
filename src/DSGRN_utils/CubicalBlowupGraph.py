@@ -458,9 +458,12 @@ class CubicalBlowupGraph:
         if self.wall_label(cc_dec_wall_top_cell, n_opaque, side) == side:
             # cc_face is an exit face of cc_coface
             return -face_sign
-        # If level < 4 check if n_opaque is actively regulate by cc_face
-        if self.level < 4 and n_opaque in self.active_regulation_map(cc_face):
-            return 0
+        # If level < 4 check if n_opaque regulates another direction at cc_face
+        if self.level < 4:
+            # Get active regulation map of cc_face
+            act_map = self.active_regulation_map(cc_face)
+            if n_opaque in act_map and act_map[n_opaque] != n_opaque:
+                return 0
         # cc_face is an entrance face of cc_coface
         return face_sign
 
