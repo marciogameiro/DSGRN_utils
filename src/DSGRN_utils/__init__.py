@@ -15,3 +15,4 @@ from DSGRN_utils.IsomorphismQuery import *
 from DSGRN_utils.WallLabelling import *
 from DSGRN_utils.RampFunction import *
 from DSGRN_utils.SaveDatabaseJSON_CubicalBlowup import *
+from ActiveInputEdges import *
