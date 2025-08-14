@@ -13,8 +13,9 @@ def MorseComponent(morse_graph, stg, graded_complex, morse_node, blowup=True):
     if (morse_node < 0) or (morse_node >= num_morse_sets):
         raise ValueError('Invalid Morse graph node')
     # Get a map from Morse node indexing to Morse graph vertices
-    vertex_index = lambda v: int(morse_graph.vertex_label(v).split(':')[0].strip())
-    index2vertex = {vertex_index(v): v for v in morse_graph.vertices()}
+    # vertex_index = lambda v: int(morse_graph.vertex_label(v).split(':')[0].strip())
+    # index2vertex = {vertex_index(v): v for v in morse_graph.vertices()}
+    index2vertex = {morse_graph.vertex_label(v)[0]: v for v in morse_graph.vertices()}
     # The grading value for the Morse node
     node_grading = index2vertex[morse_node]
     # Get the cell complex dimension

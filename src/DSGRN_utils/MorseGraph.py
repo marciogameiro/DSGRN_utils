@@ -45,7 +45,8 @@ def MorseGraph(stg, scc_dag, graded_complex, connection_matrix, prune_grad=True)
 
     def vertex_label(v):
         """Vertex label for Morse graph"""
-        return str(vertex_indices[v]) + " : " + str(tuple(conley_indices[v]))
+        # return str(vertex_indices[v]) + " : " + str(tuple(conley_indices[v]))
+        return [vertex_indices[v], num_cells[v], tuple(conley_indices[v])]
 
     # Get the grading value for fringe cells
     fringe_node_grade = graded_complex.value(stg.complex().size() - 1)
@@ -83,6 +84,8 @@ def MorseGraph(stg, scc_dag, graded_complex, connection_matrix, prune_grad=True)
     sorted_vertices.sort(key=lambda v: morse_graph_vert_ranks[v])
     # Make an indexing of the Morse graph vertices
     vertex_indices = {v: k for k, v in enumerate(sorted_vertices)}
+    # Get the number of top dimensinal cells for each Morse graph vertex
+    num_cells = {v: graded_complex.count()[v][-1] for v in sorted_vertices}
     # Define the Morse graph
     morse_graph = pychomp.DirectedAcyclicGraph()
     # Add vertices and edges

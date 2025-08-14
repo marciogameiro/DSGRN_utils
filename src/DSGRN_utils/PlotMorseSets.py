@@ -210,8 +210,9 @@ def PlotMorseSets(morse_graph, stg, graded_complex, morse_nodes=None, proj_dims=
     # Get the cubical cell complex
     cell_complex = graded_complex.complex()
     # Get indexing of the Morse graph vertices from the labels
-    vertex_index = lambda v: int(morse_graph.vertex_label(v).split(':')[0].strip())
-    vertex_indices = {v: vertex_index(v) for v in morse_graph.vertices()}
+    # vertex_index = lambda v: int(morse_graph.vertex_label(v).split(':')[0].strip())
+    # vertex_indices = {v: vertex_index(v) for v in morse_graph.vertices()}
+    vertex_indices = {v: morse_graph.vertex_label(v)[0] for v in morse_graph.vertices()}
     # # Collection of top cells to plot (collection of allowed top cells)
     # allowed_top_cells = set([cell for cell in cell_complex(dim) if allowed_cell(cell)])
 
